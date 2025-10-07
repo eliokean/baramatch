@@ -2,7 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import 'leaflet/dist/leaflet.css';
-// import './App.css'
 import Intro from './template/first.jsx'
 import AuthForm from './template/form.jsx'
 import Explorer from './template/explorer.jsx'
