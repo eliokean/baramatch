@@ -361,31 +361,9 @@ export default function Profil() {
         </div>
       </div>
 
-      {/* Navigation bottom (optionnelle pour version web) */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 lg:hidden">
-        <div className="flex items-center justify-around py-3 px-4">
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-600 transition-colors">
-            <Home className="w-6 h-6" />
-            <span className="text-xs">Accueil</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-600 transition-colors">
-            <Compass className="w-6 h-6" />
-            <span className="text-xs">Explorer</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-600 transition-colors">
-            <MessageSquare className="w-6 h-6" />
-            <span className="text-xs">Messages</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-blue-600 transition-colors">
-            <Clock className="w-6 h-6" />
-            <span className="text-xs">Historique</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-blue-600">
-            <User className="w-6 h-6" />
-            <span className="text-xs font-semibold">Profil</span>
-          </button>
-        </div>
-      </div>
+    
+      
+      
     </div>
   );
 }
