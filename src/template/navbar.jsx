@@ -11,8 +11,9 @@ export default function Navbar({ currentPage, onNavigate }) {
   ];
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-6">
+    <nav className="bg-white shadow-md w-full">
+      {/* Supprimer le max-w-7xl mx-auto pour que la navbar prenne toute la largeur */}
+      <div className="w-full px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">

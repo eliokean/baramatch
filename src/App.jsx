@@ -18,7 +18,7 @@ function App() {
       case 'intro':
         return <Intro onNavigateToForm={() => setCurrentPage('auth')} />
       case 'auth':
-        return <AuthForm />
+        return <AuthForm onSuccess={() => setCurrentPage('explorer')} />
       case 'explorer':
         return <Explorer />
       case 'message':
@@ -32,9 +32,13 @@ function App() {
     }
   }
 
+  // Pages où la navbar ne doit PAS apparaître
+  const pagesWithoutNavbar = ['auth']
+  const showNavbar = !pagesWithoutNavbar.includes(currentPage)
+
   return (
     <>
-      <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
+      {showNavbar && <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />}
       {renderPage()}
     </>
   )
