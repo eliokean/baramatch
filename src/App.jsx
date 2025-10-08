@@ -1,47 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'leaflet/dist/leaflet.css';
-import Intro from './template/first.jsx'
-import AuthForm from './template/form.jsx'
-import Explorer from './template/explorer.jsx'
-import Message from './template/message.jsx'
-import Commande from './template/commande.jsx'
-import Profil from './template/profil.jsx'
-import Navbar from './template/navbar.jsx'
+
+import Intro from './template/first.jsx';
+import AuthForm from './template/form.jsx';
+import Explorer from './template/explorer.jsx';
+import Message from './template/message.jsx';
+import Commande from './template/commande.jsx';
+import Profil from './template/profil.jsx';
+import Navbar from './template/navbar.jsx';
+import ArtisanProfil from './template/artisan_profil.jsx';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('intro')
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'intro':
-        return <Intro onNavigateToForm={() => setCurrentPage('auth')} />
-      case 'auth':
-        return <AuthForm onSuccess={() => setCurrentPage('explorer')} />
-      case 'explorer':
-        return <Explorer />
-      case 'message':
-        return <Message />
-      case 'commande':
-        return <Commande />
-      case 'profil':
-        return <Profil />
-      default:
-        return <Intro onNavigateToForm={() => setCurrentPage('auth')} />
-    }
-  }
-
-  // Pages où la navbar ne doit PAS apparaître
-  const pagesWithoutNavbar = ['auth']
-  const showNavbar = !pagesWithoutNavbar.includes(currentPage)
-
   return (
-    <>
-      {showNavbar && <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />}
-      {renderPage()}
-    </>
-  )
+    <Router>
+      {/* Navbar toujours visible sauf sur certaines pages */}
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Intro />} />
+        <Route path="/auth" element={<AuthForm />} />
+        <Route path="/explorer" element={<Explorer />} />
+        <Route path="/message" element={<Message />} />
+        <Route path="/commande" element={<Commande />} />
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/artisan/:id" element={<ArtisanProfil />} />
+      </Routes>
+
+      <div className="h-16" />
+    </Router>
+  );
 }
 
-export default App
+export default App;

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { Hammer, Scissors, Wrench, Zap, PaintBucket, Car, Shirt, Home } from 'lucide-react';
 import Map, { Marker, Popup } from 'react-map-gl';
@@ -5,6 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Explorer() {
     const [hoveredCategory, setHoveredCategory] = useState(null);
+    const navigate = useNavigate();
     const [showMap, setShowMap] = useState(false);
     const [selectedArtisan, setSelectedArtisan] = useState(null);
     const [viewState, setViewState] = useState({
@@ -283,7 +285,10 @@ function Explorer() {
                     {/* Liste des artisans sur la carte */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {artisans.map((artisan) => (
-                            <div key={artisan.id} className="flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all">
+                            <div 
+                            key={artisan.id} 
+                            className="flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all" 
+                            >
                                 <div className="relative">
                                     <img 
                                         src={artisan.image} 
@@ -307,7 +312,7 @@ function Explorer() {
                                     </div>
                                     <p className="text-sm font-semibold text-blue-600 mt-1">{artisan.price}</p>
                                 </div>
-                                <button className="bg-gradient-to-r from-blue-600 to-cyan-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition shadow-md">
+                                <button className="bg-gradient-to-r from-blue-600 to-cyan-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition shadow-md" onClick={() => navigate(`/artisan/${artisan.id}`)}>
                                     Contacter
                                 </button>
                             </div>
