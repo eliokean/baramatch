@@ -10,7 +10,7 @@ function Explorer() {
     const [showMap, setShowMap] = useState(false);
     const [selectedArtisan, setSelectedArtisan] = useState(null);
     const [viewState, setViewState] = useState({
-        longitude: -4.0083,
+        longitude: -4.0083, 
         latitude: 5.3600,
         zoom: 12
     });
@@ -165,7 +165,11 @@ function Explorer() {
             {!showMap ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 max-w-7xl mx-auto">
                     {artisans.map((artisan) => (
-                        <div key={artisan.id} className="border border-gray-300 rounded-xl p-4 text-center transition-shadow hover:shadow-lg bg-white">
+                        <div 
+                            key={artisan.id} 
+                            className="border border-gray-300 rounded-xl p-4 text-center transition-shadow hover:shadow-lg bg-white cursor-pointer"
+                            onClick={() => navigate(`/artisan/${artisan.id}`)}
+                        >
                             <div className="mb-4">
                                 <img 
                                     src={artisan.image} 
@@ -196,7 +200,13 @@ function Explorer() {
                                         {artisan.status}
                                     </span>
                                 </div>
-                                <button className="w-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-full font-semibold hover:opacity-90 transition">
+                                <button 
+                                    className="w-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-full font-semibold hover:opacity-90 transition"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        navigate(`/artisan/${artisan.id}`);
+                                    }}
+                                >
                                     Voir le profil
                                 </button>
                             </div>
@@ -272,8 +282,11 @@ function Explorer() {
                                                     {selectedArtisan.status}
                                                 </span>
                                             </div>
-                                            <button className="w-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-full font-semibold hover:opacity-90 transition text-sm">
-                                                Contacter
+                                            <button 
+                                                className="w-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white py-2 rounded-full font-semibold hover:opacity-90 transition text-sm"
+                                                onClick={() => navigate(`/artisan/${selectedArtisan.id}`)}
+                                            >
+                                                Voir le profil
                                             </button>
                                         </div>
                                     </Popup>
@@ -286,8 +299,9 @@ function Explorer() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {artisans.map((artisan) => (
                             <div 
-                            key={artisan.id} 
-                            className="flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all" 
+                                key={artisan.id} 
+                                className="flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all cursor-pointer" 
+                                onClick={() => navigate(`/artisan/${artisan.id}`)}
                             >
                                 <div className="relative">
                                     <img 
@@ -312,7 +326,13 @@ function Explorer() {
                                     </div>
                                     <p className="text-sm font-semibold text-blue-600 mt-1">{artisan.price}</p>
                                 </div>
-                                <button className="bg-gradient-to-r from-blue-600 to-cyan-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition shadow-md" onClick={() => navigate(`/artisan/${artisan.id}`)}>
+                                <button 
+                                    className="bg-gradient-to-r from-blue-600 to-cyan-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition shadow-md"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        navigate(`/artisan/${artisan.id}`);
+                                    }}
+                                >
                                     Contacter
                                 </button>
                             </div>

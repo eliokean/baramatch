@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Heart, Share2, ArrowLeft, Star, MapPin, CheckCircle, Clock, Briefcase, Award, Image, MessageSquare, Phone, Mail, MapPinned } from 'lucide-react';
 
 export default function ArtisanProfil() {
   const [activeTab, setActiveTab] = useState('about');
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const services = [
     { id: 1, name: 'Construction de maisons', icon: <Briefcase className="text-green-500" size={20} /> },
@@ -41,10 +45,6 @@ export default function ArtisanProfil() {
     { id: 4, name: 'Aminata Sidibé', rating: 5, date: '10 Août 2025', comment: 'Je suis très satisfaite de la construction de ma maison. Travail impeccable !' },
     { id: 5, name: 'Oumar Camara', rating: 5, date: '25 Juil 2025', comment: 'Professionnel sérieux et honnête. Prix raisonnable pour la qualité du travail.' }
   ];
-
-  const { id } = useParams();
-  const navigate = useNavigate();
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4 md:p-8">
@@ -359,3 +359,4 @@ export default function ArtisanProfil() {
     </div>
   );
 }
+

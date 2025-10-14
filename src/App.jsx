@@ -9,6 +9,7 @@ import Message from "./template/message.jsx";
 import Commande from "./template/commande.jsx";
 import Profil from "./template/profil.jsx";
 import ArtisanProfil from "./template/artisan_profil.jsx";
+//import Navbar from "./template/navbar_artisan.jsx"
 
 function App() {
   return (
