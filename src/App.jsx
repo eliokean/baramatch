@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./template/navbar.jsx";
 import Intro from "./template/first.jsx";
 import AuthForm from "./template/form.jsx";
@@ -9,20 +8,28 @@ import Message from "./template/message.jsx";
 import Commande from "./template/commande.jsx";
 import Profil from "./template/profil.jsx";
 import ArtisanProfil from "./template/artisan_profil.jsx";
-//import Navbar from "./template/navbar_artisan.jsx"
+import BaaraMath from "./template/one.jsx";
 
-function App() {
+// Composant pour gérer l'affichage conditionnel de la navbar
+function AppContent() {
+  const location = useLocation();
+  
+  // Pages où la navbar doit s'afficher
+  const pagesAvecNavbar = ['/'];
+  const afficherNavbar = pagesAvecNavbar.includes(location.pathname);
+  
   return (
-    <Router>
-      {/* Navbar fixe */}
-      <Navbar />
+    <>
+      {/* Navbar conditionnelle */}
+      {afficherNavbar && <Navbar />}
+      
+      {/* Espacement uniquement si navbar présente */}
+      {afficherNavbar && <div className="h-16" />}
 
-      <div className="h-16" />
-
-      {/* Container principal avec padding pour ne pas être caché par la navbar */}
-      <div className="pt-18">
+      {/* Container principal */}
+      <div className={afficherNavbar ? "pt-0" : ""}>
         <Routes>
-          <Route path="/" element={<Intro />} />
+          <Route path="/" element={<BaaraMath />} />
           <Route path="/auth" element={<AuthForm />} />
           <Route path="/explorer" element={<Explorer />} />
           <Route path="/message" element={<Message />} />
@@ -31,6 +38,14 @@ function App() {
           <Route path="/artisan/:id" element={<ArtisanProfil />} />
         </Routes>
       </div>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

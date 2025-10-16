@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Camera, MapPin, Star, ShoppingBag, CheckCircle, Heart, User, Mail, Phone, Clock, History, CreditCard, Headphones, Bell, Navigation, Info, HelpCircle, Shield, FileText, LogOut, Settings, Edit, Home, Compass, MessageSquare, ChevronRight } from 'lucide-react';
-
+import { Camera, MapPin, Star, ShoppingBag, CheckCircle, Heart, User, Mail, Phone, Clock, History, CreditCard, Headphones, Bell, Navigation, Info, HelpCircle, Shield, FileText, LogOut, Settings, Edit, Home, Compass, MessageSquare, ChevronRight, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profil() {
   const [notifications, setNotifications] = useState(true);
   const [localisation, setLocalisation] = useState(true);
   const [emailNotif, setEmailNotif] = useState(true);
   const [smsNotif, setSmsNotif] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -14,7 +15,15 @@ export default function Profil() {
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-blue-600">Mon Profil</h1>
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => navigate(-1)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <ArrowLeft className="w-6 h-6 text-gray-700" />
+              </button>
+              <h1 className="text-2xl font-bold text-gray-900">Mon Profil</h1>
+            </div>
             <div className="flex items-center gap-4">
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <Settings className="w-6 h-6 text-gray-600" />
@@ -360,11 +369,6 @@ export default function Profil() {
           </div>
         </div>
       </div>
-
-    
-      
-      
     </div>
   );
 }
-

@@ -1,101 +1,85 @@
 // template/navbar.jsx
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, Search, MessageSquare, ShoppingBag, User, Menu, X } from "lucide-react";
+import { MessageSquare, ShoppingBag, User, Menu, X, Home, Search } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
-    { id: "/", label: "Accueil", icon: Home },
-    { id: "/explorer", label: "Explorer", icon: Search },
     { id: "/message", label: "Messages", icon: MessageSquare },
     { id: "/commande", label: "Commandes", icon: ShoppingBag },
     { id: "/profil", label: "Profil", icon: User },
   ];
 
-  // Masquer la navbar sur certaines pages (ex: /auth)
+  // Masquer la navbar sur certaines pages
   const hideNavbar = ["/auth"].includes(location.pathname);
   if (hideNavbar) return null;
 
   return (
-    <nav className="bg-white shadow-md w-full fixed top-0 left-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">B</span>
+          {/* Logo - à gauche */}
+          <NavLink to="/" className="flex items-center space-x-2 flex-shrink-0">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-full flex items-center justify-center">
+              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
             </div>
-            <span className="text-xl font-semibold text-blue-700">
-              BaaraMatch
-            </span>
-          </div>
+            <span className="text-xl font-semibold text-cyan-600 hidden sm:block">BaaraMath</span>
+          </NavLink>
 
-          {/* Desktop navigation */}
-          <ul className="hidden md:flex items-center gap-2">
+          {/* Menu desktop - centré avec texte et icônes */}
+          <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               return (
-                <li key={item.id}>
-                  <NavLink
-                    to={item.id}
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
-                        isActive
-                          ? "bg-blue-700 text-white hover:bg-blue-800"
-                          : "text-gray-600 hover:bg-green-50 hover:text-green-600"
-                      }`
-                    }
-                    onClick={() => setMobileOpen(false)} // Ferme le menu mobile
-                  >
-                    <Icon size={20} />
-                    <span>{item.label}</span>
-                  </NavLink>
-                </li>
+                <NavLink
+                  key={item.id}
+                  to={item.id}
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
+                      isActive
+                        ? "bg-gradient-to-r from-cyan-500 to-teal-600 text-white shadow-md"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`
+                  }
+                >
+                  <Icon size={20} />
+                  <span>{item.label}</span>
+                </NavLink>
               );
             })}
-          </ul>
+          </nav>
 
-          {/* Mobile toggle button */}
-          <button
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-700"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Menu mobile - uniquement icônes */}
+          <nav className="md:hidden flex items-center space-x-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.id}
+                  to={item.id}
+                  className={({ isActive }) =>
+                    `p-2 rounded-lg transition-all duration-200 ${
+                      isActive
+                        ? "bg-gradient-to-r from-cyan-500 to-teal-600 text-white shadow-md"
+                        : "text-gray-600 hover:bg-gray-100"
+                    }`
+                  }
+                >
+                  <Icon size={20} />
+                </NavLink>
+              );
+            })}
+          </nav>
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
-          <ul className="flex flex-col gap-2 p-4">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <li key={item.id}>
-                  <NavLink
-                    to={item.id}
-                    className={({ isActive }) =>
-                      `flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
-                        isActive
-                          ? "bg-blue-700 text-white hover:bg-blue-800"
-                          : "text-gray-600 hover:bg-green-50 hover:text-green-600"
-                      }`
-                    }
-                    onClick={() => setMobileOpen(false)} // Ferme le menu mobile
-                  >
-                    <Icon size={20} />
-                    <span>{item.label}</span>
-                  </NavLink>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-    </nav>
+    </header>
   );
 }
