@@ -10,10 +10,11 @@ export default function BaaraMath() {
   const [viewState, setViewState] = useState({
     longitude: -4.0083,
     latitude: 5.3600,
-    zoom: 12
+    zoom: 12,
   });
 
-  const MAPBOX_TOKEN = 'pk.eyJ1IjoiZWxpb3R0MDUiLCJhIjoiY21nZjBhejAzMDNmMjJpc2Fub2wwYjg0ZiJ9.hrK5wsVmy6RSj_0Eok-SjA';
+  const MAPBOX_TOKEN =
+    'pk.eyJ1IjoiZWxpb3R0MDUiLCJhIjoiY21nZjBhejAzMDNmMjJpc2Fub2wwYjg0ZiJ9.hrK5wsVmy6RSj_0Eok-SjA';
 
   const categories = [
     { id: 'Tous', label: 'Tous', icon: User },
@@ -34,8 +35,9 @@ export default function BaaraMath() {
       distance: 2.5,
       price: '15 000 FCFA',
       disponible: true,
-      image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400',
-      position: [-4.0100, 5.3650]
+      image:
+        'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400',
+      position: [-4.01, 5.365],
     },
     {
       id: 2,
@@ -46,8 +48,9 @@ export default function BaaraMath() {
       distance: 1.2,
       price: '8 000 FCFA',
       disponible: true,
-      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400',
-      position: [-4.0050, 5.3580]
+      image:
+        'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400',
+      position: [-4.005, 5.358],
     },
     {
       id: 3,
@@ -58,9 +61,10 @@ export default function BaaraMath() {
       distance: 3.8,
       price: '12 000 FCFA',
       disponible: false,
-      image: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400',
-      position: [-4.0150, 5.3700]
-    }
+      image:
+        'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400',
+      position: [-4.015, 5.37],
+    },
   ];
 
   return (
@@ -78,20 +82,22 @@ export default function BaaraMath() {
               />
             </div>
             <div className="flex gap-2 sm:gap-3">
-              <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 bg-white rounded-xl border border-gray-200 hover:bg-gray-50 transition">
+              <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 bg-gray-100 text-gray-800 rounded-xl border border-gray-200 hover:bg-gray-200 transition font-medium">
                 <Filter className="w-5 h-5" />
-                <span className="font-medium text-sm sm:text-base">Filtres</span>
+                <span>Filtres</span>
               </button>
-              <button 
-                onClick={() => setViewMode(viewMode === 'grid' ? 'map' : 'grid')}
+              <button
+                onClick={() =>
+                  setViewMode(viewMode === 'grid' ? 'map' : 'grid')
+                }
                 className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl border transition ${
-                  viewMode === 'map' 
-                    ? 'bg-black text-white border-black' 
+                  viewMode === 'map'
+                    ? 'bg-black text-white border-black'
                     : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                 }`}
               >
                 <MapPin className="w-5 h-5" />
-                <span className="font-medium text-sm sm:text-base">Carte</span>
+                <span>Carte</span>
               </button>
             </div>
           </div>
@@ -132,7 +138,10 @@ export default function BaaraMath() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {artisans.map((artisan) => (
-                <div key={artisan.id} className="bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden">
+                <div
+                  key={artisan.id}
+                  className="bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden"
+                >
                   <div className="relative h-40 sm:h-48 overflow-hidden">
                     <img
                       src={artisan.image}
@@ -140,11 +149,13 @@ export default function BaaraMath() {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
-                      <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
-                        artisan.disponible
-                          ? 'bg-green-500 text-white'
-                          : 'bg-gray-600 text-white'
-                      }`}>
+                      <span
+                        className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
+                          artisan.disponible
+                            ? 'bg-green-500 text-white'
+                            : 'bg-gray-600 text-white'
+                        }`}
+                      >
                         {artisan.disponible ? 'Disponible' : 'Occupé'}
                       </span>
                     </div>
@@ -161,8 +172,12 @@ export default function BaaraMath() {
                     <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 text-xs sm:text-sm">
                       <div className="flex items-center gap-1">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-medium text-gray-900">{artisan.rating}</span>
-                        <span className="text-gray-500">({artisan.reviews})</span>
+                        <span className="font-medium text-gray-900">
+                          {artisan.rating}
+                        </span>
+                        <span className="text-gray-500">
+                          ({artisan.reviews})
+                        </span>
                       </div>
                       <div className="flex items-center gap-1 text-gray-500">
                         <MapPin className="w-4 h-4" />
@@ -172,7 +187,9 @@ export default function BaaraMath() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-xs text-gray-500 mb-0.5">À partir de</div>
+                        <div className="text-xs text-gray-500 mb-0.5">
+                          À partir de
+                        </div>
                         <div className="text-base sm:text-lg font-bold text-cyan-600">
                           {artisan.price}
                         </div>
@@ -191,12 +208,17 @@ export default function BaaraMath() {
         {/* Vue carte */}
         {viewMode === 'map' && (
           <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-            {/* Carte */}
-            <div className="flex-1 bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg" 
-                 style={{ height: '500px', minHeight: '400px' }}>
+            <div
+              className="flex-1 bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg"
+              style={{
+                height: '75vh',
+                minHeight: '400px',
+                width: '100%',
+              }}
+            >
               <Map
                 {...viewState}
-                onMove={evt => setViewState(evt.viewState)}
+                onMove={(evt) => setViewState(evt.viewState)}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/streets-v11"
                 mapboxAccessToken={MAPBOX_TOKEN}
@@ -208,13 +230,15 @@ export default function BaaraMath() {
                     latitude={artisan.position[1]}
                     anchor="bottom"
                   >
-                    <div 
+                    <div
                       className="cursor-pointer transform hover:scale-110 transition-transform"
                       onClick={() => setSelectedArtisan(artisan)}
                     >
-                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 sm:border-3 border-white shadow-lg flex items-center justify-center ${
-                        artisan.disponible ? 'bg-green-500' : 'bg-gray-500'
-                      }`}>
+                      <div
+                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 sm:border-3 border-white shadow-lg flex items-center justify-center ${
+                          artisan.disponible ? 'bg-green-500' : 'bg-gray-500'
+                        }`}
+                      >
                         <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                       </div>
                     </div>
@@ -232,8 +256,8 @@ export default function BaaraMath() {
                   >
                     <div className="p-3 min-w-64">
                       <div className="flex items-center gap-3 mb-3">
-                        <img 
-                          src={selectedArtisan.image} 
+                        <img
+                          src={selectedArtisan.image}
                           alt={selectedArtisan.name}
                           className="w-12 h-12 rounded-full object-cover"
                         />
@@ -255,14 +279,18 @@ export default function BaaraMath() {
               </Map>
             </div>
 
-            {/* Liste latérale - cachée sur mobile */}
-            <div className="hidden lg:block w-96 bg-white rounded-2xl shadow-sm p-6 overflow-y-auto" 
-                 style={{ height: '500px' }}>
-              <h3 className="text-lg font-semibold mb-4">Artisans à proximité</h3>
+            {/* Liste latérale (desktop uniquement) */}
+            <div
+              className="hidden lg:block w-96 bg-white rounded-2xl shadow-sm p-6 overflow-y-auto"
+              style={{ height: '75vh' }}
+            >
+              <h3 className="text-lg font-semibold mb-4">
+                Artisans à proximité
+              </h3>
               <div className="space-y-4">
                 {artisans.map((artisan) => (
-                  <div 
-                    key={artisan.id} 
+                  <div
+                    key={artisan.id}
                     className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition cursor-pointer border border-gray-100"
                     onClick={() => {
                       setSelectedArtisan(artisan);
@@ -270,7 +298,7 @@ export default function BaaraMath() {
                         ...viewState,
                         longitude: artisan.position[0],
                         latitude: artisan.position[1],
-                        zoom: 14
+                        zoom: 14,
                       });
                     }}
                   >
@@ -289,7 +317,9 @@ export default function BaaraMath() {
                           <span className="font-medium">{artisan.rating}</span>
                         </div>
                         <span className="text-gray-400">•</span>
-                        <span className="text-gray-600">{artisan.distance} km</span>
+                        <span className="text-gray-600">
+                          {artisan.distance} km
+                        </span>
                       </div>
                     </div>
                   </div>

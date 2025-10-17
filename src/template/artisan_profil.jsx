@@ -1,362 +1,396 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Heart, Share2, ArrowLeft, Star, MapPin, CheckCircle, Clock, Briefcase, Award, Image, MessageSquare, Phone, Mail, MapPinned } from 'lucide-react';
+import { useState } from 'react';
+import { Star, MapPin, Clock, CheckCircle, Settings, CreditCard, Calendar, Camera, User, Mail, Phone, Bell, Navigation } from 'lucide-react';
 
-export default function ArtisanProfil() {
-  const [activeTab, setActiveTab] = useState('about');
-  const [isFavorite, setIsFavorite] = useState(false);
+export default function ProfilArtisan() {
+  const [notifications, setNotifications] = useState(true);
+  const [localisation, setLocalisation] = useState(true);
+  const [onlinePayment, setOnlinePayment] = useState(false);
+  const [acceptAppPayments, setAcceptAppPayments] = useState(false);
 
-  const { id } = useParams();
-  const navigate = useNavigate();
+  // Données du profil
+  const profileData = {
+    name: "Koffi Menuisier",
+    rating: 4.9,
+    missions: 47,
+    specialties: 4,
+    hourlyRate: "5000 FCFA",
+    availability: "Actuellement disponible",
+    email: "koffi.menuisier@email.com",
+    phone: "+225 05 06 07 08 09",
+    location: "Abidjan, Yopougon",
+    description: "Menuisier qualifié avec 10 ans d'expérience. Spécialisé dans les meubles sur mesure et les installations résidentielles et commerciales.",
+    certification: "Certifié par la Chambre des Métiers",
+    memberSince: "Membre depuis 2014"
+  };
 
-  const services = [
-    { id: 1, name: 'Construction de maisons', icon: <Briefcase className="text-green-500" size={20} /> },
-    { id: 2, name: 'Fondations', icon: <CheckCircle className="text-green-500" size={20} /> },
-    { id: 3, name: 'Enduits et finitions', icon: <CheckCircle className="text-green-500" size={20} /> },
-    { id: 4, name: 'Réparation de murs', icon: <CheckCircle className="text-green-500" size={20} /> },
-    { id: 5, name: 'Carrelage', icon: <CheckCircle className="text-green-500" size={20} /> }
+  // Compétences
+  const skills = [
+    "Meubles sur mesure",
+    "Portes et fenêtres", 
+    "Étagères",
+    "Rénovation"
   ];
 
-  const certifications = [
-    { id: 1, name: 'Certification BTP Mali', icon: <Award className="text-blue-600" size={32} /> },
-    { id: 2, name: 'Formation sécurité chantier', icon: <Award className="text-blue-600" size={32} /> },
-    { id: 3, name: 'Maçonnerie traditionnelle', icon: <Award className="text-blue-600" size={32} /> }
+  // Réalisations récentes
+  const recentWorks = [
+    {
+      title: "Meuble TV en acajou",
+      description: "Réalisation sur mesure pour client à Cocody",
+      rating: 5.0,
+      duration: "2 jours"
+    },
+    {
+      title: "Porte d'entrée",
+      description: "Fabrication et installation pour résidence à Marcory",
+      rating: 4.5,
+      duration: "7 jours"
+    }
   ];
 
-  const stats = [
-    { number: '340', label: 'Projets terminés', icon: <Briefcase size={24} /> },
-    { number: '8 ans', label: "d'expérience", icon: <Clock size={24} /> },
-    { number: '< 15min', label: 'Temps de réponse', icon: <MessageSquare size={24} /> }
-  ];
-
-  const portfolioItems = [
-    { id: 1, title: 'Construction Villa Moderne', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop', description: 'Villa 4 chambres - Bamako' },
-    { id: 2, title: 'Rénovation Immeuble', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop', description: 'Rénovation complète - Centre ville' },
-    { id: 3, title: 'Fondations Complexe', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop', description: 'Fondations commerciales' },
-    { id: 4, title: 'Maison Traditionnelle', image: 'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=400&h=300&fit=crop', description: 'Construction traditionnelle' },
-    { id: 5, title: 'Murs de Clôture', image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=300&fit=crop', description: 'Clôture résidentielle' },
-    { id: 6, title: 'Extension Maison', image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&h=300&fit=crop', description: 'Extension 2 pièces' }
-  ];
-
+  // Avis clients
   const reviews = [
-    { id: 1, name: 'Moussa Diarra', rating: 5, date: '15 Sept 2025', comment: 'Excellent travail ! Très professionnel et respecte les délais. Je recommande vivement.' },
-    { id: 2, name: 'Fatima Koné', rating: 5, date: '03 Sept 2025', comment: 'Travail soigné et de qualité. Amadou est très compétent et à l\'écoute.' },
-    { id: 3, name: 'Ibrahim Touré', rating: 4, date: '28 Août 2025', comment: 'Bon maçon, travail sérieux. Quelques retards mais résultat satisfaisant.' },
-    { id: 4, name: 'Aminata Sidibé', rating: 5, date: '10 Août 2025', comment: 'Je suis très satisfaite de la construction de ma maison. Travail impeccable !' },
-    { id: 5, name: 'Oumar Camara', rating: 5, date: '25 Juil 2025', comment: 'Professionnel sérieux et honnête. Prix raisonnable pour la qualité du travail.' }
+    {
+      client: "Amani K.",
+      time: "5 jours",
+      rating: 5.0,
+      comment: "Excellent travail, très professionnel!",
+      avatar: "A"
+    },
+    {
+      client: "Fatou D.", 
+      time: "12 jours",
+      rating: 4.0,
+      comment: "Bon artisan mais un peu en retard sur le délai",
+      avatar: "F"
+    }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header Navigation */}
-        <div className="flex items-center justify-between mb-6">
-          <button
-            className="text-blue-600 flex items-center gap-2 bg-white px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-all hover:scale-105"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft size={20} />
-            <span className="font-medium">Retour</span>
-          </button>
-          <div className="flex gap-3">
-            <button 
-              onClick={() => setIsFavorite(!isFavorite)}
-              className="bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition-all hover:scale-105"
-            >
-              <Heart size={20} className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600'} />
-            </button>
-            <button className="bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition-all hover:scale-105">
-              <Share2 size={20} className="text-gray-600" />
-            </button>
-          </div>
-        </div>
-
-        {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 mb-6">
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
-            {/* Left Section */}
-            <div className="flex flex-col md:flex-row gap-6 items-center md:items-start flex-1">
-              <div className="relative">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-1">
-                  <div className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-4xl overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" 
-                      alt="Amadou Traoré" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 right-0 bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center border-4 border-white">
-                  <CheckCircle size={20} />
-                </div>
-              </div>
-
-              <div className="text-center md:text-left">
-                <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-2">Amadou Traoré</h1>
-                <p className="text-gray-600 text-lg mb-4">Maçon Expert</p>
-                
-                <div className="flex flex-col md:flex-row items-center gap-4 mb-4">
-                  <div className="flex items-center gap-2">
-                    <Star size={20} className="text-yellow-400 fill-yellow-400" />
-                    <span className="font-semibold text-lg">4.9</span>
-                    <span className="text-gray-500">(127 avis)</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <MapPin size={18} />
-                    <span>Bamako, Mali</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                  <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium flex items-center gap-2">
-                    <CheckCircle size={16} />
-                    Disponible
-                  </span>
-                  <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium flex items-center gap-2">
-                    <Clock size={16} />
-                    Réponse &lt; 15min
-                  </span>
-                  <span className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium flex items-center gap-2">
-                    <Briefcase size={16} />
-                    8 ans d'expérience
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Section - Price & Actions */}
-            <div className="flex flex-col items-center lg:items-end gap-4 w-full lg:w-auto">
-              <div className="text-center lg:text-right">
-                <div className="text-4xl font-bold text-blue-900">15,000 FCFA</div>
-                <div className="text-gray-500">par jour</div>
-              </div>
-              <div className="flex flex-col gap-3 w-full lg:w-auto">
-                <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-xl font-medium hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
-                  <MessageSquare size={20} />
-                  Contacter
-                </button>
-                <button className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-xl font-medium hover:bg-blue-50 transition-all flex items-center justify-center gap-2">
-                  <Briefcase size={20} />
-                  Réserver
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tabs Navigation */}
-        <div className="bg-white rounded-2xl shadow-lg mb-6 overflow-hidden">
-          <div className="flex border-b overflow-x-auto">
-            {[
-              { id: 'about', label: 'À propos', icon: <Briefcase size={18} /> },
-              { id: 'portfolio', label: 'Portfolio', icon: <Image size={18} /> },
-              { id: 'reviews', label: 'Avis', icon: <Star size={18} /> },
-              { id: 'contact', label: 'Contact', icon: <Phone size={18} /> }
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-4 font-medium transition-all whitespace-nowrap flex items-center gap-2 ${
-                  activeTab === tab.id
-                    ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
-                    : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
-                }`}
-              >
-                {tab.icon}
-                {tab.label}
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center gap-4">
+              <button className="p-2 hover:bg-gray-100 rounded-lg">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
-            ))}
+              <h1 className="text-xl font-bold text-gray-900">Mon Profil</h1>
+            </div>
+            <div className="flex items-center gap-3">
+              <button className="p-2 hover:bg-gray-100 rounded-lg">
+                <Settings className="w-5 h-5 text-gray-600" />
+              </button>
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
+                Modifier
+              </button>
+            </div>
           </div>
+        </div>
+      </div>
 
-          <div className="p-6 md:p-8">
-            {activeTab === 'about' && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <MessageSquare className="text-blue-600" />
-                    Description
-                  </h2>
-                  <p className="text-gray-700 leading-relaxed text-lg">
-                    Maçon professionnel avec plus de 8 ans d'expérience dans la construction résidentielle et commerciale. 
-                    Spécialisé dans les fondations, murs porteurs, et finitions. Travail soigné et respect des délais garantis.
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          
+          {/* Colonne gauche */}
+          <div className="lg:col-span-1 space-y-4 sm:space-y-6">
+            {/* Card profil */}
+            <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden">
+              <div className="p-6 sm:p-8 text-white">
+                <div className="flex justify-center mb-4 sm:mb-6">
+                  <div className="relative">
+                    <div className="w-24 h-24 sm:w-32 sm:h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center border-4 border-white">
+                      <span className="text-4xl sm:text-5xl font-bold">KM</span>
+                    </div>
+                    <button className="absolute top-0 right-0 w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+                      <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                    </button>
+                    <div className="absolute bottom-0 right-0 w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center border-4 border-white">
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <h2 className="text-xl sm:text-2xl font-bold">Koffi Menuisier</h2>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                    <span className="text-lg font-bold">4.9</span>
+                    <span className="text-white text-opacity-75">(47 missions)</span>
+                    <span className="text-white text-opacity-75">4 spécialités</span>
+                  </div>
+                  <p className="text-sm text-white text-opacity-75">
+                    {profileData.memberSince}
                   </p>
                 </div>
+              </div>
+            </div>
 
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <CheckCircle className="text-blue-600" />
-                    Services proposés
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {services.map(service => (
-                      <div key={service.id} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl hover:bg-blue-50 transition-all border border-transparent hover:border-blue-200">
-                        {service.icon}
-                        <span className="text-gray-700 font-medium">{service.name}</span>
-                      </div>
-                    ))}
-                  </div>
+            {/* Statistiques */}
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="space-y-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-gray-900">{profileData.missions}</div>
+                  <div className="text-gray-600">Missions</div>
                 </div>
-
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <Award className="text-blue-600" />
-                    Certifications
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {certifications.map(cert => (
-                      <div key={cert.id} className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 hover:shadow-lg transition-all">
-                        <div className="mb-3 flex justify-center">{cert.icon}</div>
-                        <div className="text-gray-800 font-medium text-center">{cert.name}</div>
-                      </div>
-                    ))}
+                
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1 mb-1">
+                    <Star className="w-6 h-6 text-yellow-400 fill-current" />
+                    <span className="text-3xl font-bold text-gray-900">{profileData.rating}</span>
                   </div>
+                  <div className="text-gray-600">Note moyenne</div>
                 </div>
-
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <Briefcase className="text-blue-600" />
-                    Statistiques
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {stats.map((stat, index) => (
-                      <div key={index} className="text-center p-6 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all">
-                        <div className="flex justify-center mb-3">{stat.icon}</div>
-                        <div className="text-4xl font-bold mb-2">{stat.number}</div>
-                        <div className="text-blue-100">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
+                
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900">{profileData.hourlyRate}</div>
+                  <div className="text-gray-600">Taux horaire</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-lg font-semibold text-green-600">{profileData.availability}</div>
+                  <div className="text-gray-600">Disponibilité</div>
                 </div>
               </div>
-            )}
+            </div>
 
-            {activeTab === 'portfolio' && (
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Image className="text-blue-600" />
-                  Mes réalisations
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {portfolioItems.map(item => (
-                    <div key={item.id} className="group overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all bg-white">
-                      <div className="h-48 overflow-hidden">
-                        <img 
-                          src={item.image} 
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
+            {/* Informations professionnelles */}
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
+                Informations professionnelles
+              </h3>
+              
+              <div className="space-y-4 sm:space-y-5">
+                {[
+                  { icon: User, label: 'Nom complet', value: profileData.name },
+                  { icon: Mail, label: 'Email professionnel', value: profileData.email },
+                  { icon: Phone, label: 'Téléphone', value: profileData.phone },
+                  { icon: MapPin, label: 'Zone d\'intervention', value: profileData.location }
+                ].map((info, index) => (
+                  <div key={index} className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <info.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs sm:text-sm text-gray-500 mb-1">{info.label}</p>
+                      <p className="text-sm sm:text-base font-semibold text-gray-900 truncate">
+                        {info.value}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <p className="text-xs sm:text-sm text-gray-500 mb-2">Description</p>
+                <p className="text-sm sm:text-base text-gray-900">
+                  {profileData.description}
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <p className="text-xs sm:text-sm text-gray-500 mb-2">Certification</p>
+                <p className="text-sm sm:text-base font-semibold text-gray-900">
+                  {profileData.certification}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Colonne droite */}
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+            {/* Compétences et Réalisations */}
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
+                Compétences
+              </h3>
+              
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                {skills.map((skill, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700 font-medium">{skill}</span>
+                  </div>
+                ))}
+              </div>
+
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">Réalisations récentes</h4>
+              <div className="space-y-4">
+                {recentWorks.map((work, index) => (
+                  <div key={index} className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div className="flex justify-between items-start mb-2">
+                      <h5 className="font-semibold text-gray-900">{work.title}</h5>
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                          <span className="text-sm font-medium">{work.rating}</span>
+                        </div>
                       </div>
-                      <div className="p-4">
-                        <h3 className="font-bold text-gray-900 mb-1">{item.title}</h3>
-                        <p className="text-gray-600 text-sm">{item.description}</p>
-                      </div>
+                    </div>
+                    <p className="text-gray-600 text-sm mb-2">{work.description}</p>
+                    <div className="flex items-center gap-2 text-sm text-gray-500">
+                      <Clock className="w-4 h-4" />
+                      {work.duration}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">Galerie de travaux</h4>
+                <div className="grid grid-cols-3 gap-4">
+                  {[1, 2, 3].map((item) => (
+                    <div key={item} className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
+                      <span className="text-gray-400">Image {item}</span>
                     </div>
                   ))}
                 </div>
               </div>
-            )}
+            </div>
 
-            {activeTab === 'reviews' && (
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Star className="text-blue-600" />
-                  Avis clients (127)
-                </h2>
-                <div className="space-y-4">
-                  {reviews.map(review => (
-                    <div key={review.id} className="p-6 bg-gray-50 rounded-xl hover:shadow-md transition-all">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <h3 className="font-bold text-gray-900">{review.name}</h3>
-                          <p className="text-sm text-gray-500">{review.date}</p>
-                        </div>
-                        <div className="flex gap-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star 
-                              key={i} 
-                              size={16} 
-                              className={i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'} 
-                            />
-                          ))}
-                        </div>
-                      </div>
-                      <p className="text-gray-700">{review.comment}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'contact' && (
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                  <Phone className="text-blue-600" />
-                  Informations de contact
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border border-blue-200">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                        <Phone className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900">Téléphone</h3>
-                        <p className="text-blue-600 font-medium">+223 76 54 32 10</p>
-                      </div>
-                    </div>
+            {/* Avis clients */}
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div className="flex justify-between items-center mb-4 sm:mb-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                  Avis clients
+                </h3>
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
+                    <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                    <span className="font-semibold">4.9/5.0</span>
+                    <span className="text-gray-500">(32 avis)</span>
                   </div>
-
-                  <div className="p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
-                        <MessageSquare className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900">WhatsApp</h3>
-                        <p className="text-green-600 font-medium">+223 76 54 32 10</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl border border-purple-200">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-                        <Mail className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900">Email</h3>
-                        <p className="text-purple-600 font-medium">amadou.traore@gmail.com</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-gradient-to-br from-red-50 to-red-100 rounded-xl border border-red-200">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
-                        <MapPinned className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900">Adresse</h3>
-                        <p className="text-red-600 font-medium">Bamako, Mali</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8 p-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl text-white text-center">
-                  <h3 className="text-2xl font-bold mb-4">Prêt à démarrer votre projet ?</h3>
-                  <p className="mb-6 text-blue-100">Contactez-moi dès maintenant pour discuter de votre projet de construction</p>
-                  <button className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-lg flex items-center gap-2 mx-auto">
-                    <MessageSquare size={20} />
-                    Envoyer un message
+                  <button className="text-blue-500 hover:text-blue-600 font-medium ml-4">
+                    Voir tout
                   </button>
                 </div>
               </div>
-            )}
+
+              <div className="space-y-4">
+                {reviews.map((review, index) => (
+                  <div key={index} className="pb-4 border-b border-gray-200 last:border-b-0 last:pb-0">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                          {review.avatar}
+                        </div>
+                        <div>
+                          <div className="font-medium text-gray-900">{review.client}</div>
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1">
+                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                              <span className="text-sm text-gray-600">{review.rating}</span>
+                            </div>
+                            <span className="text-gray-400">•</span>
+                            <span className="text-sm text-gray-500">{review.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-gray-700">{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Paramètres */}
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
+                Paramètres
+              </h3>
+              
+              <div className="space-y-4">
+                {[
+                  {
+                    icon: Bell,
+                    title: 'Notifications push',
+                    desc: 'Recevoir les notifications',
+                    state: notifications,
+                    setState: setNotifications
+                  },
+                  {
+                    icon: Navigation,
+                    title: 'Localisation',
+                    desc: 'Permettre la géolocalisation',
+                    state: localisation,
+                    setState: setLocalisation
+                  },
+                  {
+                    icon: CreditCard,
+                    title: 'Paiement en ligne',
+                    desc: 'Activer/désactiver les paiements en ligne',
+                    state: onlinePayment,
+                    setState: setOnlinePayment
+                  },
+                  {
+                    icon: CreditCard,
+                    title: 'Accepter les paiements via l\'application',
+                    desc: 'Permettre aux clients de payer via l\'app',
+                    state: acceptAppPayments,
+                    setState: setAcceptAppPayments
+                  },
+                  {
+                    icon: Calendar,
+                    title: 'Gérer mes disponibilités',
+                    desc: 'Définir vos créneaux disponibles',
+                    state: false,
+                    action: true
+                  },
+                  {
+                    icon: CreditCard,
+                    title: 'Moyens de paiement',
+                    desc: 'Configurer vos options de paiement',
+                    state: false,
+                    action: true
+                  }
+                ].map((pref, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 bg-gray-50 rounded-xl"
+                  >
+                    <div className="flex items-center gap-4 min-w-0 flex-1">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <pref.icon className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-semibold text-gray-900 text-base">
+                          {pref.title}
+                        </p>
+                        <p className="text-sm text-gray-500 truncate">
+                          {pref.desc}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {pref.action ? (
+                      <button className="px-4 py-2 text-blue-500 hover:text-blue-600 font-medium flex-shrink-0 ml-3">
+                        {pref.title.includes('disponibilités') ? 'Gérer' : 'Configurer'}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => pref.setState(!pref.state)}
+                        className={`relative w-14 h-8 rounded-full transition-colors flex-shrink-0 ml-3 ${
+                          pref.state ? 'bg-blue-600' : 'bg-gray-300'
+                        }`}
+                      >
+                        <span
+                          className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform ${
+                            pref.state ? 'translate-x-6' : 'translate-x-0'
+                          }`}
+                        />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
