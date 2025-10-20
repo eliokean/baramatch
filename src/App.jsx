@@ -94,13 +94,14 @@ function AppContent() {
   const { user } = useAuth();
 
   // Pages spécifiques
-  const pagesClient = ["/", "/message", "/commande", "/profil"];
-  const pagesArtisan = [
-    "/artisan/dashboard",
-    "/artisan/messages",
-    "/artisan/commandes",
-    "/artisan/profil",
-  ];
+  const pagesClient = ["/home", "/message", "/commande", "/profil"];
+const pagesArtisan = [
+  "/artisan/dashboard",
+  "/artisan/messages",
+  "/artisan/commandes",
+  "/artisan/profil",
+];
+
 
   // Gestion de l’affichage des barres
   const afficherNavbarClient =
@@ -221,7 +222,7 @@ function OnboardingRoute() {
   const { user, updateUserType } = useAuth();
   const [selectedAccount, setSelectedAccount] = useState(null);
 
-  if (!user) return <Navigate to="/auth" replace />;
+  if (!user) return <Navigate to="/home" replace />;
   if (user.type)
     return <Navigate to={user.type === "client" ? "/home" : "/artisan/dashboard"} replace />;
 
