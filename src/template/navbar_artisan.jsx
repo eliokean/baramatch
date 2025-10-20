@@ -8,9 +8,9 @@ export default function NavbarArtisan() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
-    { id: "/message", label: "Messages", icon: MessageSquare },
-    { id: "/commande", label: "Commandes", icon: ShoppingBag },
-    { id: "/profil", label: "Profil", icon: User },
+    { id: "/artisan/messages", label: "Messages", icon: MessageSquare },
+    { id: "/artisan/commandes", label: "Commandes", icon: ShoppingBag },
+    { id: "/artisan/profil", label: "Profil", icon: User },
   ];
 
   // Masquer la navbar sur certaines pages
@@ -22,7 +22,7 @@ export default function NavbarArtisan() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo - à gauche */}
-          <NavLink to="/" className="flex items-center space-x-2 flex-shrink-0">
+          <NavLink to="/artisan/dashboard" className="flex items-center space-x-2 flex-shrink-0">
             <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-full flex items-center justify-center">
               <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />

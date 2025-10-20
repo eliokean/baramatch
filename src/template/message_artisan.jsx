@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, MessageCircle, Send, Phone, Video, MoreVertical, ArrowLeft } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 export default function MessageArtisan() {
   const [selectedChat, setSelectedChat] = useState(1);

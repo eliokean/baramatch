@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Star, MapPin, Clock, CheckCircle, Settings, CreditCard, Calendar, Camera, User, Mail, Phone, Bell, Navigation } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilArtisan() {
   const [notifications, setNotifications] = useState(true);

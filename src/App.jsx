@@ -117,7 +117,6 @@ const pagesArtisan = [
       {/* Header + Navbar Artisan */}
       {!isIntroPage && afficherNavbarArtisan && (
         <>
-          <HeaderArtisan />
           <NavbarArtisan />
         </>
       )}
