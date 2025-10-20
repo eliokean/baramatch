@@ -1,7 +1,7 @@
 import { ArrowLeft, Settings, Edit, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export function PageHeader({ 
+export default function HeaderArtisan({ 
   title, 
   icon: Icon, 
   showBackButton = true, 

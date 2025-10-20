@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MessageSquare, ShoppingBag, User, Menu, X, Home, Search } from "lucide-react";
 
-export default function Navbar() {
+export default function NavbarArtisan() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 

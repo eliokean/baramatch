@@ -65,6 +65,21 @@ html, body, #root {
   padding: 0;
 }
 
+.mapboxgl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.mapboxgl-map {
+  min-height: 400px;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
